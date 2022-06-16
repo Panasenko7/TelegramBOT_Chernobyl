@@ -32,7 +32,9 @@ def func(message):
 
     elif message.text == "Add":
         bot.send_message(message.chat.id, text="Введите имя,фамилию человека которого хотите добавить")
-        bot.send_message(message.chat.id, 'Успешно добавлен2')
+        add_employee(message.text)
+        # bot.send_message(message.chat.id, f"Вы успешно добавили {message.text}")
+        bot.register_next_step_handler(message, add_employee_)
 
     elif message.text == "Remove":
         bot.send_message(message.chat.id, text="Введите имя,фамилию человека которого хотите удалить")
@@ -48,7 +50,7 @@ def func(message):
         bot.send_message(message.chat.id, text="Какую смену формируем?", reply_markup=markup)
 
     elif message.text == "Утренняя смена":
-        bot.send_message(message.chat.id, "ХУЮтренняя смена")
+        bot.send_message(message.chat.id, text="ХУЮтренняя смена")
 
     elif message.text == "Дневная смена":
         bot.send_message(message.chat.id, text="ХУЕдневная смена")
@@ -71,12 +73,11 @@ def func(message):
                                                " start; info; help; add or remove")
 
 
-@bot.message_handler(content_types=['text'])
-def unknown_message_from_user(message):
+def add_employee_(message):
     add_employee(message.text)
     bot.send_message(message.chat.id, 'Успешно добавлен')
-    # bot.send_message(message.chat.id, 'Позвольте предложить вам воспользоваться одной из команд в меню :'
-    #                                   ' start; info; help; add or remove')
+    bot.register_next_step_handler(message, func)
 
-
+bot.enable_save_next_step_handlers(delay=1)   #  Включает сохранения пошагового обработчика
+bot.load_next_step_handlers()                 #  Загрузка пошагового обработчика
 bot.polling(none_stop=True)
