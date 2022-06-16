@@ -24,7 +24,7 @@ def start(message):
 @bot.message_handler(content_types=['text'])
 def func(message):
     if message.text == "Start":
-        bot.send_message(message.chat.id, text="Чего сидим?... Го замутим сменки!)")
+        bot.send_message(message.chat.id, text="Чего сидим? Го замутим сменки!)")
 
     elif message.text == "Info":
         bot.send_message(message.chat.id, text="Общая статистика по сотрудникам :")
@@ -32,7 +32,6 @@ def func(message):
 
     elif message.text == "Add":
         bot.send_message(message.chat.id, text="Введите имя,фамилию человека которого хотите добавить")
-        add_employee(message.text)
         # bot.send_message(message.chat.id, f"Вы успешно добавили {message.text}")
         bot.register_next_step_handler(message, add_employee_)
 
