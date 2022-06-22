@@ -3,6 +3,7 @@ from telebot import types
 
 from telebot_employees import add_employee
 from telebot_employees import get_employees
+from telebot_employees import remove_employee
 
 bot = telebot.TeleBot('5560343365:AAFWsgh3glvdFLV5r4MUkI7sts885CHh1Cg')
 
@@ -21,6 +22,31 @@ def start(message):
                      .format(message.from_user), reply_markup=markup)
 
 
+@bot.message_handler(commands=['info'])
+def information(message):
+    bot.send_message(message.chat.id, text="Общая статистика по сотрудникам :")
+    bot.send_message(message.chat.id, str(get_employees()))
+
+
+@bot.message_handler(commands=['add'])
+def adding(message):
+    bot.send_message(message.chat.id, text="Введите имя,фамилию человека которого хотите добавить")
+    bot.register_next_step_handler(message, add_employee_)
+
+
+@bot.message_handler(commands=['help'])
+def help_(message):
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    btn1 = types.KeyboardButton("Утренняя смена")
+    btn2 = types.KeyboardButton("Дневная смена")
+    btn3 = types.KeyboardButton("Вечерняя смена")
+
+    back = types.KeyboardButton("Вернуться в главное меню")
+    markup.add(btn1, btn2, btn3, back)
+    bot.send_message(message.chat.id, text="Какую смену формируем?", reply_markup=markup)
+    bot.register_next_step_handler(message, func)
+
+
 @bot.message_handler(content_types=['text'])
 def func(message):
     if message.text == "Start":
@@ -32,21 +58,14 @@ def func(message):
 
     elif message.text == "Add":
         bot.send_message(message.chat.id, text="Введите имя,фамилию человека которого хотите добавить")
-        # bot.send_message(message.chat.id, f"Вы успешно добавили {message.text}")
         bot.register_next_step_handler(message, add_employee_)
 
     elif message.text == "Remove":
         bot.send_message(message.chat.id, text="Введите имя,фамилию человека которого хотите удалить")
+        bot.register_next_step_handler(message, remove_employee_)
 
     elif message.text == "Help":
-        markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-        btn1 = types.KeyboardButton("Утренняя смена")
-        btn2 = types.KeyboardButton("Дневная смена")
-        btn3 = types.KeyboardButton("Вечерняя смена")
-
-        back = types.KeyboardButton("Вернуться в главное меню")
-        markup.add(btn1, btn2, btn3, back)
-        bot.send_message(message.chat.id, text="Какую смену формируем?", reply_markup=markup)
+        help_(message)
 
     elif message.text == "Утренняя смена":
         bot.send_message(message.chat.id, text="ХУЮтренняя смена")
@@ -72,10 +91,22 @@ def func(message):
                                                " start; info; help; add or remove")
 
 
+
+
 def add_employee_(message):
     add_employee(message.text)
     bot.send_message(message.chat.id, 'Успешно добавлен')
+    bot.register_next_step_handler(message, help)
+
+
+def remove_employee_(message):
+    if remove_employee(message.text):
+        bot.send_message(message.chat.id, 'Успешно удален')
+    else:
+        bot.send_message(message.chat.id, 'Net takogo usera')
+
     bot.register_next_step_handler(message, func)
+
 
 bot.enable_save_next_step_handlers(delay=1)   #  Включает сохранения пошагового обработчика
 bot.load_next_step_handlers()                 #  Загрузка пошагового обработчика

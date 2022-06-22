@@ -20,7 +20,8 @@ class User(Base):
         return f"User(id={self.id!r}, name={self.name!r}, hours={self.working_hours!r})"
 
     def __str__(self):
-        return f" Name={self.name!r}, worked for hours={self.working_hours!r}"
+        return f" Name= {self.name!r}, worked {self.working_hours!r} hours"
+
 
 from sqlalchemy import create_engine
 engine = create_engine("sqlite:///file.sql", echo=True, future=True)
