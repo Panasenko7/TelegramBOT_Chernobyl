@@ -104,6 +104,6 @@ def callback_inline_4(call):
     markup.add(button1, button2, button3, button4)
     photo = open("./images/111.jpg", 'rb')
     bot.send_photo(call.message.chat.id, photo=photo, caption='Name!')
-    bot.send_message(call.message.chat.id, """инфа про человека""".format(call.message.from_user), reply_markup=markup)
+    bot.send_message(call.message.chat.id, """инфа про человека1111""".format(call.message.from_user), reply_markup=markup)
 
 bot.polling(none_stop=True)
