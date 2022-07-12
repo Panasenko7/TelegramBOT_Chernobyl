@@ -1,6 +1,8 @@
 import telebot
 from telebot import types
 from main_menu_func import main_menu1, submain_menu1
+# from crew_file import my_crew
+
 
 bot = telebot.TeleBot('5556517526:AAFwJT7z7Mog4ygR2-6VOqdycy3mlH3PlRU')
 
@@ -52,5 +54,56 @@ def main_menu(message):
 def submain_menu(message):
     submain_menu1(message)
 
+
+@bot.callback_query_handler(func=lambda c: c.data == '1')
+def callback_inline_1(call):
+    markup = types.InlineKeyboardMarkup()
+    button1 = types.InlineKeyboardButton(text="1", callback_data='1')
+    button2 = types.InlineKeyboardButton(text="2", callback_data='2')
+    button3 = types.InlineKeyboardButton(text="3", callback_data='3')
+    button4 = types.InlineKeyboardButton(text="4", callback_data='4')
+    markup.add(button1, button2, button3, button4)
+    photo = open("./images/111.jpg", 'rb')
+    bot.send_photo(call.message.chat.id, photo=photo, caption='Name!')
+    bot.send_message(call.message.chat.id, """инфа про человека""".format(call.message.from_user), reply_markup=markup)
+
+
+@bot.callback_query_handler(func=lambda c: c.data == '2')
+def callback_inline_2(call):
+    markup = types.InlineKeyboardMarkup()
+    button1 = types.InlineKeyboardButton(text="1", callback_data='1')
+    button2 = types.InlineKeyboardButton(text="2", callback_data='2')
+    button3 = types.InlineKeyboardButton(text="3", callback_data='3')
+    button4 = types.InlineKeyboardButton(text="4", callback_data='4')
+    markup.add(button1, button2, button3, button4)
+    photo = open("./images/1122.jpg", 'rb')
+    bot.send_photo(call.message.chat.id, photo=photo, caption='Name!')
+    bot.send_message(call.message.chat.id, """инфа про человека""".format(call.message.from_user), reply_markup=markup)
+
+
+@bot.callback_query_handler(func=lambda c: c.data == '3')
+def callback_inline_3(call):
+    markup = types.InlineKeyboardMarkup()
+    button1 = types.InlineKeyboardButton(text="1", callback_data='1')
+    button2 = types.InlineKeyboardButton(text="2", callback_data='2')
+    button3 = types.InlineKeyboardButton(text="3", callback_data='3')
+    button4 = types.InlineKeyboardButton(text="4", callback_data='4')
+    markup.add(button1, button2, button3, button4)
+    photo = open("./images/111.jpg", 'rb')
+    bot.send_photo(call.message.chat.id, photo=photo, caption='Name!')
+    bot.send_message(call.message.chat.id, """инфа про человека""".format(call.message.from_user), reply_markup=markup)
+
+
+@bot.callback_query_handler(func=lambda c: c.data == '4')
+def callback_inline_4(call):
+    markup = types.InlineKeyboardMarkup()
+    button1 = types.InlineKeyboardButton(text="1", callback_data='1')
+    button2 = types.InlineKeyboardButton(text="2", callback_data='2')
+    button3 = types.InlineKeyboardButton(text="3", callback_data='3')
+    button4 = types.InlineKeyboardButton(text="4", callback_data='4')
+    markup.add(button1, button2, button3, button4)
+    photo = open("./images/111.jpg", 'rb')
+    bot.send_photo(call.message.chat.id, photo=photo, caption='Name!')
+    bot.send_message(call.message.chat.id, """инфа про человека""".format(call.message.from_user), reply_markup=markup)
 
 bot.polling(none_stop=True)

@@ -1,5 +1,6 @@
 import telebot
 from telebot import types
+from crew_file import my_crew
 
 bot = telebot.TeleBot('5556517526:AAFwJT7z7Mog4ygR2-6VOqdycy3mlH3PlRU')
 
@@ -24,9 +25,9 @@ def main_menu1(message):
 
 
 def submain_menu1(message):
+    from crew_file import my_crew
     if message.text == "Наша команда":
-        bot.send_message(message.chat.id, text="команда заебись")
-        bot.send_photo(message.chat.id, photo="https://vjoy.cc/kartinki-dlya-dushi-44-foto/", caption='It works!')
+        my_crew(message)
 
     elif message.text == "Типы туров":
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
