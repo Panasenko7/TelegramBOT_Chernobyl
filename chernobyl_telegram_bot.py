@@ -1,5 +1,6 @@
 import telebot
 from telebot import types
+from main_menu_func import main_menu1, submain_menu1
 
 bot = telebot.TeleBot('5556517526:AAFwJT7z7Mog4ygR2-6VOqdycy3mlH3PlRU')
 
@@ -44,61 +45,12 @@ def callback_inline_rus(call):
 
 
 def main_menu(message):
-
-    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    btn1 = types.KeyboardButton(text="Типы туров")    #
-    btn2 = types.KeyboardButton(text="Наша команда")  #
-    btn3 = types.KeyboardButton(text="Транспорт")  #
-    btn4 = types.KeyboardButton(text="Радиацыонная обстановка")  #
-    btn5 = types.KeyboardButton(text="Контакты")  #
-    btn6 = types.KeyboardButton(text="Что брать с собой?")   #
-    btn7 = types.KeyboardButton(text="Форма одежды")  #
-    markup.add(btn1, btn2, btn3, btn4, btn5, btn6, btn7)
-    bot.send_message(message.chat.id, text="Главное меню:".format(message.from_user), reply_markup=markup)
-    bot.register_next_step_handler(message, submain_menu)
+    main_menu1(message)
 
 
 @bot.message_handler(content_types=['text'])
 def submain_menu(message):
-    if message.text == "Наша команда":
-        bot.send_message(message.chat.id, text="команда заебись")
-    elif message.text == "Типы туров":
-        markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-        btn1 = types.KeyboardButton("Na 1 day")
-        btn2 = types.KeyboardButton("Na 2 days")
-        btn3 = types.KeyboardButton("Privat")
+    submain_menu1(message)
 
-        back = types.KeyboardButton("Вернуться в главное меню")
-        markup.add(btn1, btn2, btn3, back)
-        bot.send_message(message.chat.id, text="Задай мне вопрос", reply_markup=markup)
-
-    elif message.text == "Транспорт":
-        bot.send_message(message.chat.id, "заебись")
-
-    elif message.text == "Радиацыонная обстановка":
-        bot.send_message(message.chat.id, "Norma")
-
-    elif message.text == "Контакты":
-        contacts(message)
-
-    elif message.text == "Что брать с собой?":
-        bot.send_message(message.chat.id, text="Ebu")
-
-    elif message.text == "Форма одежды":
-        bot.send_message(message.chat.id, text="Ebu 2/0")
-
-    elif message.text == "Вернуться в главное меню":
-        markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-        btn1 = types.KeyboardButton("Типы туров")
-        btn2 = types.KeyboardButton("Наша команда")  #
-        btn3 = types.KeyboardButton("Транспорт")  #
-        btn4 = types.KeyboardButton("Радиацыонная обстановка")  #
-        btn5 = types.KeyboardButton("Контакты")  #
-        btn6 = types.KeyboardButton("Что брать с собой?")  #
-        btn7 = types.KeyboardButton("Форма одежды")  #
-        markup.add(btn1, btn2, btn3, btn4, btn5, btn6, btn7)
-        bot.send_message(message.chat.id, text="Вы вернулись в главное меню", reply_markup=markup)
-    else:
-        bot.send_message(message.chat.id, text="На такую комманду я не запрограммировал..")
 
 bot.polling(none_stop=True)
