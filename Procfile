@@ -1,1 +1,1 @@
-web: python schedule_of_shifts_telegram_bot.py
+web: python chernobyl_telegram_bot.py
