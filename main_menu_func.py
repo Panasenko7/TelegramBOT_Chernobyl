@@ -26,6 +26,8 @@ def main_menu1(message):
 def submain_menu1(message):
     if message.text == "Наша команда":
         bot.send_message(message.chat.id, text="команда заебись")
+        bot.send_photo(message.chat.id, photo="https://vjoy.cc/kartinki-dlya-dushi-44-foto/", caption='It works!')
+
     elif message.text == "Типы туров":
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
         btn1 = types.KeyboardButton("Na 1 day")
