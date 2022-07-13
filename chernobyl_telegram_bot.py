@@ -9,7 +9,7 @@ bot = telebot.TeleBot('5556517526:AAFwJT7z7Mog4ygR2-6VOqdycy3mlH3PlRU')
 
 @bot.message_handler(commands=['start'])
 def language_choice(message):
-    bot.send_message(message.chat.id, text="🚧❗РЕБЯ, бот не доделан, он в стадии ранней альфы...❗🚧")
+    bot.send_message(message.chat.id, text="🚧❗РЕБЯ, бот не доделан, он в стадии ранней альфы ❗🚧")
     markup = types.InlineKeyboardMarkup()
     button1 = types.InlineKeyboardButton(text="Українська 🇺🇦", callback_data='ukr')
     button2 = types.InlineKeyboardButton(text="English 🇬🇧", callback_data='eng')
