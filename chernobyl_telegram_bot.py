@@ -78,7 +78,7 @@ def callback_inline_2(call):
     markup.add(button1, button2, button3, button4)
     photo = open("./images/1122.jpg", 'rb')
     bot.send_photo(call.message.chat.id, photo=photo, caption='Name!')
-    bot.send_message(call.message.chat.id, """инфа про человека""".format(call.message.from_user), reply_markup=markup)
+    bot.send_message(call.message.chat.id, """Инфа про человека""".format(call.message.from_user), reply_markup=markup)
 
 
 @bot.callback_query_handler(func=lambda c: c.data == '3')
@@ -89,7 +89,7 @@ def callback_inline_3(call):
     button3 = types.InlineKeyboardButton(text="3", callback_data='3')
     button4 = types.InlineKeyboardButton(text="4", callback_data='4')
     markup.add(button1, button2, button3, button4)
-    photo = open("./images/111.jpg", 'rb')
+    photo = open("./images/IMAG2241.jpg", 'rb')
     bot.send_photo(call.message.chat.id, photo=photo, caption='Name!')
     bot.send_message(call.message.chat.id, """инфа про человека""".format(call.message.from_user), reply_markup=markup)
 
@@ -102,7 +102,7 @@ def callback_inline_4(call):
     button3 = types.InlineKeyboardButton(text="3", callback_data='3')
     button4 = types.InlineKeyboardButton(text="4", callback_data='4')
     markup.add(button1, button2, button3, button4)
-    photo = open("./images/111.jpg", 'rb')
+    photo = open("./images/IMAG2245.jpg", 'rb')
     bot.send_photo(call.message.chat.id, photo=photo, caption='Name!')
     bot.send_message(call.message.chat.id, """инфа про человека1111""".format(call.message.from_user), reply_markup=markup)
 
