@@ -26,8 +26,7 @@ def back_to_menu(message):
 
 @bot.message_handler(commands=['contacts'])
 def contacts(message):
-    bot.send_message(message.chat.id, """Вітаю, {0.first_name}! Оберіть мову будь-ласка.
-    Hello, {0.first_name}! Please, choose the language.""".format(message.from_user), reply_markup=markup)
+    bot.send_message(message.chat.id, text='Звони по номеру +380931378795')
 
 
 @bot.callback_query_handler(func=lambda c: c.data == 'ukr')

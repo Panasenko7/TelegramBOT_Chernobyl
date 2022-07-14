@@ -1,13 +1,13 @@
 import telebot
 from telebot import types
-from crew_file import my_crew
+from asorc import fake_rad_situation, RAD_LEVELS, show_rad
 
 bot = telebot.TeleBot('5556517526:AAFwJT7z7Mog4ygR2-6VOqdycy3mlH3PlRU')
 
 
 @bot.message_handler(commands=['contacts'])
 def contacts(message):
-    bot.send_message(message.chat.id, text='Звони по номеру 380931378795')
+    bot.send_message(message.chat.id, text='Звони по номеру +380931378795')
 
 
 def main_menu1(message):
@@ -31,19 +31,28 @@ def submain_menu1(message):
 
     elif message.text == "Типы туров":
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-        btn1 = types.KeyboardButton("Na 1 day")
-        btn2 = types.KeyboardButton("Na 2 days")
-        btn3 = types.KeyboardButton("Privat")
+        btn1 = types.KeyboardButton("Стандартные на 1 день")
+        btn2 = types.KeyboardButton("Двухдневные туры")
+        btn3 = types.KeyboardButton("Приватные туры")
 
         back = types.KeyboardButton("Вернуться в главное меню")
         markup.add(btn1, btn2, btn3, back)
         bot.send_message(message.chat.id, text="Задай мне вопрос", reply_markup=markup)
 
+    elif message.text == "Стандартные на 1 день":
+        bot.send_message(message.chat.id, text="Тут план стандартного тура")
+
+    elif message.text == "Двухдневные туры":
+        bot.send_message(message.chat.id, text="Тут план 2хдневного тура")
+
+    elif message.text == "Приватные туры":
+        bot.send_message(message.chat.id, text="Тут план и описание ПРИВАТА")
+
     elif message.text == "Транспорт":
         bot.send_message(message.chat.id, "заебись")
 
     elif message.text == "Радиацыонная обстановка":
-        bot.send_message(message.chat.id, "Norma")
+        fake_rad_situation(message)
 
     elif message.text == "Контакты":
         contacts(message)
@@ -65,5 +74,9 @@ def submain_menu1(message):
         btn7 = types.KeyboardButton("Форма одежды")  #
         markup.add(btn1, btn2, btn3, btn4, btn5, btn6, btn7)
         bot.send_message(message.chat.id, text="Вы вернулись в главное меню", reply_markup=markup)
+
+    elif message.text in RAD_LEVELS:
+        show_rad(message)
+
     else:
         bot.send_message(message.chat.id, text="На такую комманду я не запрограммировал..")
