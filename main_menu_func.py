@@ -1,6 +1,7 @@
 import telebot
 from telebot import types
 from asorc import fake_rad_situation, RAD_LEVELS, show_rad
+from globals import context
 
 bot = telebot.TeleBot('5556517526:AAFwJT7z7Mog4ygR2-6VOqdycy3mlH3PlRU')
 
@@ -11,6 +12,7 @@ def contacts(message):
 
 
 def main_menu1(message):
+    context["language"] = message.text
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
     btn1 = types.KeyboardButton(text="Типы туров")
     btn2 = types.KeyboardButton(text="Наша команда")

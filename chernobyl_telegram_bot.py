@@ -1,7 +1,6 @@
 import telebot
 from telebot import types
 from main_menu_func import main_menu1, submain_menu1
-# from crew_file import my_crew
 
 
 bot = telebot.TeleBot('5556517526:AAFwJT7z7Mog4ygR2-6VOqdycy3mlH3PlRU')
@@ -105,6 +104,6 @@ def callback_inline_4(call):
     markup.add(button1, button2, button3, button4)
     photo = open("./images/IMAG2245.jpg", 'rb')
     bot.send_photo(call.message.chat.id, photo=photo, caption='Name!')
-    bot.send_message(call.message.chat.id, """инфа про человека1111""".format(call.message.from_user), reply_markup=markup)
+    bot.send_message(call.message.chat.id, "инфа про человека1111".format(call.message.from_user), reply_markup=markup)
 
 bot.polling(none_stop=True)
