@@ -1,18 +1,18 @@
 import telebot
 from telebot import types
 from asorc import fake_rad_situation, RAD_LEVELS, show_rad
-from globals import context
+from csvlanguagetest import write_to_csv, read_from_csv
 
 bot = telebot.TeleBot('5556517526:AAFwJT7z7Mog4ygR2-6VOqdycy3mlH3PlRU')
 
 
 @bot.message_handler(commands=['contacts'])
 def contacts(message):
-    bot.send_message(message.chat.id, text='Звони по номеру +380931378795')
+    bot.send_message(message.chat.id, text="Звони по номеру +380931378795 Inst: stalker___7")
 
 
 def main_menu1(message):
-    context["language"] = message.text
+    print(read_from_csv(message.chat.id))
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
     btn1 = types.KeyboardButton(text="Типы туров")
     btn2 = types.KeyboardButton(text="Наша команда")

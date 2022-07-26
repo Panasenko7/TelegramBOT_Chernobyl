@@ -1,7 +1,7 @@
 import telebot
 from telebot import types
 from main_menu_func import main_menu1, submain_menu1
-
+from csvlanguagetest import write_to_csv
 
 bot = telebot.TeleBot('5556517526:AAFwJT7z7Mog4ygR2-6VOqdycy3mlH3PlRU')
 
@@ -25,24 +25,28 @@ def back_to_menu(message):
 
 @bot.message_handler(commands=['contacts'])
 def contacts(message):
-    bot.send_message(message.chat.id, text='Звони по номеру +380931378795')
+    bot.send_message(message.chat.id, text='Звони по номеру +380931378795 '
+                                           'Inst: stalker___7')
 
 
 @bot.callback_query_handler(func=lambda c: c.data == 'ukr')
 def callback_inline_ukr(call):
     # TODO: add language info to context
+    write_to_csv(call.from_user.id, "ukr")
     main_menu(call.message)
 
 
 @bot.callback_query_handler(func=lambda c: c.data == 'eng')
 def callback_inline_eng(call):
     # TODO: add language info to context
+    write_to_csv(call.from_user.id, "eng")
     main_menu(call.message)
 
 
 @bot.callback_query_handler(func=lambda c: c.data == 'rus')
 def callback_inline_rus(call):
     # TODO: add language info to context
+    write_to_csv(call.from_user.id, "rus")
     main_menu(call.message)
 
 
