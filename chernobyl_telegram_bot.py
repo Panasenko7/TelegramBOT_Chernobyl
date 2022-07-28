@@ -25,8 +25,8 @@ def back_to_menu(message):
 
 @bot.message_handler(commands=['contacts'])
 def contacts(message):
-    bot.send_message(message.chat.id, text='Звони по номеру +380931378795 '
-                                           'Inst: stalker___7')
+    bot.send_message(message.chat.id, text="""Звони по номеру +380931378795
+Inst: stalker___7""")
 
 
 @bot.callback_query_handler(func=lambda c: c.data == 'ukr')
