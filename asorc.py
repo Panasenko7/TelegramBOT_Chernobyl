@@ -1,6 +1,9 @@
 import telebot
 import random
 from telebot import types
+from translations.helper import get_subbutton_text_by_language
+
+from csvlanguagetest import read_from_csv
 
 
 bot = telebot.TeleBot('5556517526:AAFwJT7z7Mog4ygR2-6VOqdycy3mlH3PlRU')
@@ -19,16 +22,17 @@ RAD_LEVELS = {
 
 def fake_rad_situation(message):
 
+    language = (read_from_csv(message.chat.id))
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    btn1 = types.KeyboardButton(text="КПП Дитятки")
-    btn2 = types.KeyboardButton(text="г.Чернобыль")
-    btn3 = types.KeyboardButton(text="ЗГРЛС Дуга")
-    btn4 = types.KeyboardButton(text="с.Копачи")
-    btn5 = types.KeyboardButton(text="3-я очередь строительства ЧАЭС")
-    btn6 = types.KeyboardButton(text="Чернобыльская АЭС")
-    btn7 = types.KeyboardButton(text="Рыжий лес")
-    btn8 = types.KeyboardButton(text="г.Припять")
-    btn9 = types.KeyboardButton(text="Вернуться в главное меню")
+    btn1 = types.KeyboardButton(text=get_subbutton_text_by_language(language, "rad_lvl", "button_1"))
+    btn2 = types.KeyboardButton(text=get_subbutton_text_by_language(language, "rad_lvl", "button_2"))
+    btn3 = types.KeyboardButton(text=get_subbutton_text_by_language(language, "rad_lvl", "button_3"))
+    btn4 = types.KeyboardButton(text=get_subbutton_text_by_language(language, "rad_lvl", "button_4"))
+    btn5 = types.KeyboardButton(text=get_subbutton_text_by_language(language, "rad_lvl", "button_5"))
+    btn6 = types.KeyboardButton(text=get_subbutton_text_by_language(language, "rad_lvl", "button_6"))
+    btn7 = types.KeyboardButton(text=get_subbutton_text_by_language(language, "rad_lvl", "button_7"))
+    btn8 = types.KeyboardButton(text=get_subbutton_text_by_language(language, "rad_lvl", "button_8"))
+    btn9 = types.KeyboardButton(text=get_subbutton_text_by_language(language, "rad_lvl", "button_9"))
     markup.add(btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9)
     bot.send_message(
         message.chat.id,
@@ -37,7 +41,9 @@ def fake_rad_situation(message):
     )
 
 
+# noinspection PyArgumentList
 def show_rad(message):
+    from main_menu_func import main_menu1
     rad_levels_list = RAD_LEVELS[message.text]
     rad_level = random.choice(rad_levels_list)
 
@@ -46,14 +52,5 @@ def show_rad(message):
         text=f"Cейчас уровень излучения на {message.text} равен {rad_level} мкЗв/ч.",
     )
 
-    if message.text == "Вернуться в главное меню":
-        markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-        btn1 = types.KeyboardButton("Типы туров")
-        btn2 = types.KeyboardButton("Наша команда")
-        btn3 = types.KeyboardButton("Транспорт")
-        btn4 = types.KeyboardButton("Радиацыонная обстановка")
-        btn5 = types.KeyboardButton("Контакты")
-        btn6 = types.KeyboardButton("Что брать с собой?")
-        btn7 = types.KeyboardButton("Форма одежды")
-        markup.add(btn1, btn2, btn3, btn4, btn5, btn6, btn7)
-        bot.send_message(message.chat.id, text="Вы вернулись в главное меню", reply_markup=markup)
+    if message.text == get_subbutton_text_by_language("rad_lvl", "button_9"):
+        return main_menu1(message)

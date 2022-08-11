@@ -1,9 +1,10 @@
 import telebot
 from telebot import types
 from asorc import fake_rad_situation, RAD_LEVELS, show_rad
-
-from csvlanguagetest import write_to_csv, read_from_csv
-from translations.helper import get_text_by_language, get_button_text_by_language, get_all_values_by_key_word
+from transport import my_transport
+from crew_file import my_crew
+from csvlanguagetest import read_from_csv
+from translations.helper import get_button_text_by_language, get_menu_values_by_key_word, get_rad_lvl_values_by_key_word
 
 
 bot = telebot.TeleBot('5556517526:AAFwJT7z7Mog4ygR2-6VOqdycy3mlH3PlRU')
@@ -32,11 +33,10 @@ def main_menu1(message):
 
 def submain_menu1(message):
 
-    from crew_file import my_crew
-    if message.text in get_all_values_by_key_word('main_menu', 'button_2'):  # "Наша команда":
+    if message.text in get_menu_values_by_key_word('main_menu', 'button_2'):  # "Наша команда":
         my_crew(message)
 
-    elif message.text in get_all_values_by_key_word('main_menu', 'button_1'):  # "Типы туров":
+    elif message.text in get_menu_values_by_key_word('main_menu', 'button_1'):  # "Типы туров":
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
         btn1 = types.KeyboardButton("Стандартные на 1 день")
         btn2 = types.KeyboardButton("Двухдневные туры")
@@ -55,22 +55,22 @@ def submain_menu1(message):
     elif message.text == "Приватные туры":
         bot.send_message(message.chat.id, text="Тут план и описание ПРИВАТА")
 
-    elif message.text in get_all_values_by_key_word('main_menu', 'button_3'):  # "Транспорт":
-        bot.send_message(message.chat.id, "заебись")
+    elif message.text in get_menu_values_by_key_word('main_menu', 'button_3'):  # "Транспорт":
+        my_transport(message)
 
-    elif message.text in get_all_values_by_key_word('main_menu', 'button_4'):  # "Радиацыонная обстановка":
+    elif message.text in get_menu_values_by_key_word('main_menu', 'button_4'):  # "Радиацыонная обстановка":
         fake_rad_situation(message)
 
-    elif message.text in get_all_values_by_key_word('main_menu', 'button_5'):  # Контакты":
+    elif message.text in get_menu_values_by_key_word('main_menu', 'button_5'):  # Контакты":
         contacts(message)
 
-    elif message.text in get_all_values_by_key_word('main_menu', 'button_6'):  # "Что брать с собой?":
+    elif message.text in get_menu_values_by_key_word('main_menu', 'button_6'):  # "Что брать с собой?":
         bot.send_message(message.chat.id, text="Ebu")
 
-    elif message.text in get_all_values_by_key_word('main_menu', 'button_7'):  # "Форма одежды":
+    elif message.text in get_menu_values_by_key_word('main_menu', 'button_7'):  # "Форма одежды":
         bot.send_message(message.chat.id, text="Ebu 2/0")
 
-    elif message.text == "Вернуться в главное меню":
+    elif message.text in get_rad_lvl_values_by_key_word ('rad_lvl', 'button_9'):
         main_menu1(message)
 
     elif message.text in RAD_LEVELS:

@@ -14,5 +14,3 @@ def my_crew(message):
     photo = open("./images/111.jpg", 'rb')
     bot.send_photo(message.chat.id, photo=photo, caption='Name!')
     bot.send_message(message.chat.id, """инфа про человека""".format(message.from_user), reply_markup=markup)
-
-

@@ -47,3 +47,55 @@ BUTTON_TRANSLATIONS = {
 
     },
 }
+
+RADLEVEL_TRANSLATIONS = {
+    'rad_lvl': {
+        'button_1': {
+            'eng': 'Checkpoint Dityatki',
+            'rus': "КПП Дитятки",
+            'ukr': 'КПП Дитятки',
+        },
+        'button_2': {
+            'eng': 'Chermobil',
+            'rus': "г.Чернобыль",
+            'ukr': 'м.Чорнобиль',
+        },
+        'button_3': {
+            'eng': 'DUGA Radar',
+            'rus': "ЗГРЛС Дуга",
+            'ukr': 'ЗГРЛС Дуга',
+        },
+        'button_4': {
+            'eng': 'Kopachi village',
+            'rus': "с.Копачи",
+            'ukr': 'с.Копачи',
+        },
+        'button_5': {
+            'eng': '3rd construction line',
+            'rus': "3-я очередь строительства ЧАЭС",
+            'ukr': '3-тя черга будівництва ЧАЄС',
+        },
+        'button_6': {
+            'eng': 'Chernobyl NPP',
+            'rus': "Чернобыльская АЭС",
+            'ukr': 'Чорнобильська АЄС',
+        },
+        'button_7': {
+            'eng': 'Red forest',
+            'rus': "Рыжий лес",
+            'ukr': 'Рудий ліс',
+        },
+        'button_8': {
+            'eng': 'Pripyat',
+            'rus': "г.Припять",
+            'ukr': 'м.Припять',
+        },
+        'button_9': {
+            'eng': 'Back to menu',
+            'rus': "Вернуться в главное меню",
+            'ukr': 'Повернутися до меню',
+        },
+
+
+    },
+}
