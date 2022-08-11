@@ -4,7 +4,13 @@ from asorc import fake_rad_situation, RAD_LEVELS, show_rad
 from transport import my_transport
 from crew_file import my_crew
 from csvlanguagetest import read_from_csv
-from translations.helper import get_button_text_by_language, get_menu_values_by_key_word, get_rad_lvl_values_by_key_word
+from translations.helper import (
+    get_button_text_by_language,
+    get_menu_values_by_key_word,
+    get_rad_lvl_values_by_key_word,
+    get_messagetext_by_language,
+    get_rad_lvl_keys,
+)
 
 
 bot = telebot.TeleBot('5556517526:AAFwJT7z7Mog4ygR2-6VOqdycy3mlH3PlRU')
@@ -27,7 +33,9 @@ def main_menu1(message):
     btn6 = types.KeyboardButton(text=get_button_text_by_language(language, "main_menu", "button_6"))
     btn7 = types.KeyboardButton(text=get_button_text_by_language(language, "main_menu", "button_7"))
     markup.add(btn1, btn2, btn3, btn4, btn5, btn6, btn7)
-    bot.send_message(message.chat.id, text="Главное меню:".format(message.from_user), reply_markup=markup)
+
+    message_text = get_messagetext_by_language(language, "main_menu")
+    bot.send_message(message.chat.id, text=message_text, reply_markup=markup)
     bot.register_next_step_handler(message, submain_menu1)
 
 
@@ -70,10 +78,10 @@ def submain_menu1(message):
     elif message.text in get_menu_values_by_key_word('main_menu', 'button_7'):  # "Форма одежды":
         bot.send_message(message.chat.id, text="Ebu 2/0")
 
-    elif message.text in get_rad_lvl_values_by_key_word ('rad_lvl', 'button_9'):
+    elif message.text in get_rad_lvl_values_by_key_word('rad_lvl', 'button_9'):
         main_menu1(message)
 
-    elif message.text in RAD_LEVELS:
+    elif message.text in get_rad_lvl_keys():
         show_rad(message)
 
     else:

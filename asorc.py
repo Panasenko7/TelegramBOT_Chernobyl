@@ -9,14 +9,15 @@ from csvlanguagetest import read_from_csv
 bot = telebot.TeleBot('5556517526:AAFwJT7z7Mog4ygR2-6VOqdycy3mlH3PlRU')
 
 RAD_LEVELS = {
-    'КПП Дитятки':  [8, 12, 17, 24, 15, 21, 19, 10, 23, 14],
-    "г.Чернобыль": [9, 12, 17, 11, 15, 9, 10, 19, 23, 14],
-    "ЗГРЛС Дуга": [21, 15, 17, 24, 37, 52, 19, 14, 23, 45],
-    "с.Копачи": [65, 12, 17, 24, 15, 21, 19, 10, 23, 14],
-    "3-я очередь строительства ЧАЭС": [8, 12, 17, 24, 15, 21, 19, 10, 23, 14],
-    "Чернобыльская АЭС": [224, 220, 189, 240, 197, 234, 256, 210, 238, 192],
-    "Рыжий лес": [125, 127, 155, 141, 156, 112, 120, 121, 114, 118],
-    "г.Припять": [101, 87, 123, 141, 96, 112, 93, 69, 114, 91]
+    ('КПП Дитятки', "Checkpoint Dityatki", "КПП Дитятки"):  [8, 12, 17, 24, 15, 21, 19, 10, 23, 14],
+    ("г.Чернобыль", "Chernobil", "м.Чорнобиль"): [9, 12, 17, 11, 15, 9, 10, 19, 23, 14],
+    ("ЗГРЛС Дуга", "DUGA Radar", "ЗГРЛС Дуга"): [21, 15, 17, 24, 37, 52, 19, 14, 23, 45],
+    ("с.Копачи", "Kopachi village", "с.Копачи"): [65, 12, 17, 24, 15, 21, 19, 10, 23, 14],
+    ("3-я очередь строительства ЧАЭС", "3rd construction line",
+     "3-тя черга будівництва ЧАЄС"): [8, 12, 17, 24, 15, 21, 19, 10, 23, 14],
+    ("Чернобыльская АЭС", "Chernobyl NPP", "Чорнобильська АЄС"): [224, 220, 189, 240, 197, 234, 256, 210, 238, 192],
+    ("Рыжий лес", "Red forest", "Рудий ліс"): [125, 127, 155, 141, 156, 112, 120, 121, 114, 118],
+    ("г.Припять", "Pripyat", "м.Припять"): [101, 87, 123, 141, 96, 112, 93, 69, 114, 91]
 }
 
 
@@ -43,14 +44,18 @@ def fake_rad_situation(message):
 
 # noinspection PyArgumentList
 def show_rad(message):
+
     from main_menu_func import main_menu1
-    rad_levels_list = RAD_LEVELS[message.text]
-    rad_level = random.choice(rad_levels_list)
+    language = (read_from_csv(message.chat.id))
+
+    for key, value in RAD_LEVELS.items():
+        if message.text in key:
+            rad_level = random.choice(value)
 
     bot.send_message(
         message.chat.id,
         text=f"Cейчас уровень излучения на {message.text} равен {rad_level} мкЗв/ч.",
     )
 
-    if message.text == get_subbutton_text_by_language("rad_lvl", "button_9"):
+    if message.text == get_subbutton_text_by_language(language, "rad_lvl", "button_9"):
         return main_menu1(message)

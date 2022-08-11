@@ -56,7 +56,7 @@ RADLEVEL_TRANSLATIONS = {
             'ukr': 'КПП Дитятки',
         },
         'button_2': {
-            'eng': 'Chermobil',
+            'eng': 'Chernobil',
             'rus': "г.Чернобыль",
             'ukr': 'м.Чорнобиль',
         },
